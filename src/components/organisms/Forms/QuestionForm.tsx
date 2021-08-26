@@ -10,7 +10,7 @@ export const QuestionForm: FC = () => {
 
 	const onCallback = (data: typeof initialValues) => {
 		quiz.create({ title: data.question, answer: data.answer });
-		history.push('/quiz/all');
+		history.push('/admin/quiz/all');
 	};
 
 	const { values, errors, handleChange, handleSubmit } = useForm({

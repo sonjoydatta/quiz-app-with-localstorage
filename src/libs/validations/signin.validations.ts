@@ -27,12 +27,9 @@ export const signinValidations = (values: Partial<typeof initialValues>): Partia
 					if (!value) {
 						errors['password'] = 'Password is required';
 					} else {
-						if (value?.length < 8) {
-							errors['password'] = 'Password should be minimum 8 characters';
-						} else {
-							errors['password'] = null;
-						}
+						errors['password'] = null;
 					}
+					break;
 			}
 		}
 	}

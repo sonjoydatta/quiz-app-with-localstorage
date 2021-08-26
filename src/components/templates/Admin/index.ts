@@ -1,3 +1,3 @@
-export * from './AddQuiz';
-export * from './AllQuizzes';
 export * from './Dashboard';
+export * from './Member';
+export * from './Quiz';

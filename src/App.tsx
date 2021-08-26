@@ -1,22 +1,18 @@
-import { AddQuiz, AllQuizzes, Dashboard, UserSignin } from 'components/templates';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { AdminRoute } from 'routes';
+import { routeList } from 'routes/constants';
 
 const App = () => {
 	return (
 		<Router>
 			<Switch>
-				<Route exact path="/">
-					<UserSignin />
-				</Route>
-				<Route path="/dashboard">
-					<Dashboard />
-				</Route>
-				<Route path="/quiz/all">
-					<AllQuizzes />
-				</Route>
-				<Route path="/quiz/add-new">
-					<AddQuiz />
-				</Route>
+				{routeList.map(({ type, ...rest }, i) =>
+					type === 'public' ? (
+						<Route key={i} exact {...rest} />
+					) : type === 'admin' ? (
+						<AdminRoute key={i} {...rest} />
+					) : null,
+				)}
 			</Switch>
 		</Router>
 	);

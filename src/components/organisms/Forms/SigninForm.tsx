@@ -1,14 +1,26 @@
 import { Button, FormInput } from 'components/atoms';
+import { user } from 'libs/api';
 import { useForm } from 'libs/hooks';
 import { signinValidations as validate } from 'libs/validations';
 import { FC } from 'react';
+import { useHistory } from 'react-router-dom';
+import { tokenService } from 'service';
 
 export const SigninForm: FC = () => {
-	const onCallback = () => {
-		console.log('Tested');
+	const history = useHistory();
+
+	const onCallback = (data: typeof initialValues) => {
+		const { emailAddress, password } = data;
+		const userData = user.singIn(emailAddress, password);
+		if (userData) {
+			tokenService.setToken(userData);
+			history.push('/admin/dashboard');
+		} else {
+			setErrors((prevState) => ({ ...prevState, emailAddress: 'Email or password is invalid!' }));
+		}
 	};
 
-	const { values, errors, handleChange, handleSubmit } = useForm({
+	const { values, errors, setErrors, handleChange, handleSubmit } = useForm({
 		initialValues,
 		initialErrors,
 		validate,
@@ -33,7 +45,7 @@ export const SigninForm: FC = () => {
 				label="Password"
 				type="password"
 				name="password"
-				placeholder="Min. 8 character"
+				placeholder="Enter your password"
 				onChange={handleChange}
 				value={values.password}
 				message={errors.password}

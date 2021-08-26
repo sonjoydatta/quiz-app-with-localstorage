@@ -2,14 +2,14 @@
 import { IDGenerator } from 'utils/helpers';
 import { DB } from '../abstractions/storage';
 
-export interface Quiz {
+export interface IQuiz {
 	id: string;
 	title: string;
 	description?: string;
 	answer: string;
 }
 
-class QuizDB extends DB<Quiz> {
+class QuizDB extends DB<IQuiz> {
 	constructor() {
 		super('quiz');
 	}
@@ -22,12 +22,12 @@ class QuizDB extends DB<Quiz> {
 		return this.getAll();
 	}
 
-	create(quiz: Omit<Quiz, 'id'>) {
+	create(quiz: Omit<IQuiz, 'id'>) {
 		const id = IDGenerator();
 		return this.set(id, { ...quiz, id });
 	}
 
-	update(id: string, value: Partial<Omit<Quiz, 'id'>>) {
+	update(id: string, value: Partial<Omit<IQuiz, 'id'>>) {
 		const found = this.findOne(id);
 		if (found) {
 			this.set(id, Object.assign(found, value));

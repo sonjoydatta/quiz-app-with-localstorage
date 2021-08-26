@@ -1,12 +1,12 @@
 import { IconButton } from 'components/molecules';
 import { AdminLayout } from 'components/organisms';
-import { Quiz, quiz } from 'libs/api';
+import { IQuiz, quiz } from 'libs/api';
 import { deleteBin, eyeOpen } from 'libs/icons';
 import { FC, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export const AllQuizzes: FC = () => {
-	const [data, setData] = useState<Quiz[]>([]);
+	const [data, setData] = useState<IQuiz[]>([]);
 	const history = useHistory();
 
 	useEffect(() => {
@@ -21,8 +21,7 @@ export const AllQuizzes: FC = () => {
 	return (
 		<AdminLayout>
 			<div className="w-100 mt-3">
-				<h2>Quizzes</h2>
-				<h6 className="text-secondary mb-5">Please add your question &amp; answer over here!</h6>
+				<h2 className="mb-5">Quizzes</h2>
 
 				<table className="table">
 					<thead>
@@ -40,7 +39,10 @@ export const AllQuizzes: FC = () => {
 									<td>{answer}</td>
 									<td>
 										<div className="d-flex justify-content-evenly">
-											<IconButton path={eyeOpen} onClick={() => history.push(`/quiz/${id}`)} />
+											<IconButton
+												path={eyeOpen}
+												onClick={() => history.push(`/admin/quiz/${id}`)}
+											/>
 											<IconButton path={deleteBin} onClick={() => handleDelete(id)} />
 										</div>
 									</td>

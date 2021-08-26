@@ -1,4 +1,4 @@
-import { initialErrors, initialValues } from 'components/organisms';
+import { initialErrors, initialValues } from 'components/organisms/Forms/QuestionForm';
 import { formatValidatorKey } from 'utils/helpers';
 
 export const questionValidations = (values: Partial<typeof initialValues>): Partial<typeof initialErrors> => {
