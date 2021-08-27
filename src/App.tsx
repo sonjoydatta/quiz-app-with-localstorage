@@ -18,7 +18,7 @@ const App: FC = () => {
 					) : type === 'admin' ? (
 						<AdminRoute key={i} {...rest} />
 					) : (
-						<Route key={i} exact {...rest} />
+						<Route key={i} {...rest} />
 					),
 				)}
 			</Switch>

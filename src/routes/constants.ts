@@ -12,7 +12,7 @@ import {
 } from 'components/templates';
 
 export const routeList = [
-	{ type: 'public', path: '/', component: UserSignin },
+	{ type: 'public', exact: true, path: '/', component: UserSignin },
 	{ type: 'admin', path: '/admin/dashboard', component: Dashboard },
 	{ type: 'admin', path: '/admin/quiz/all', component: AllQuizzes },
 	{ type: 'admin', path: '/admin/quiz/add-new', component: AddQuiz },
