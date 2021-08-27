@@ -13,8 +13,14 @@ export const SigninForm: FC = () => {
 		const { emailAddress, password } = data;
 		const userData = user.singIn(emailAddress, password);
 		if (userData) {
-			tokenService.setToken(userData);
-			history.push('/admin/dashboard');
+			const { isAdmin } = userData;
+			tokenService.setToken(userData)!;
+
+			if (isAdmin) {
+				history.push('/admin/dashboard');
+			} else {
+				history.push('/user/dashboard');
+			}
 		} else {
 			setErrors((prevState) => ({ ...prevState, emailAddress: 'Email or password is invalid!' }));
 		}

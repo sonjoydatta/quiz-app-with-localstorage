@@ -8,7 +8,7 @@ export class DB<T> {
 
 	protected set(key: string, value: T) {
 		localStorage.setItem(`${this.databaseName}_${key}`, JSON.stringify(value));
-		return this.get(`${this.databaseName}_${key}`)!;
+		return this.get(key)!;
 	}
 
 	protected get(key: string): T | null {

@@ -25,6 +25,9 @@ export class UsersDB extends DB<IUser> {
 
 	create(user: Omit<IUser, 'id'>) {
 		const id = IDGenerator();
+		const users = this.findAll();
+		const isRegistered = users.find((e) => e.emailAddress === user.emailAddress);
+		if (isRegistered) return null;
 		return this.set(id, { ...user, id });
 	}
 
@@ -32,10 +35,8 @@ export class UsersDB extends DB<IUser> {
 		const users = this.findAll();
 		const user = users.find((e) => e.emailAddress === emailAddress && e.password === password);
 		if (!user) return null;
-		return {
-			id: user.id,
-			isAdmin: user.isAdmin,
-		};
+		const { password: omitPassword, ...rest } = user;
+		return rest;
 	}
 }
 

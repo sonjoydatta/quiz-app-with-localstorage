@@ -1,7 +1,6 @@
-type IUserToken = {
-	id: string;
-	isAdmin: boolean;
-};
+import { IUser } from 'libs/api';
+
+export type IUserToken = Omit<IUser, 'password'>;
 
 class TokenService {
 	getToken(): IUserToken | null {

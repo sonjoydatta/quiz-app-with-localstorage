@@ -6,12 +6,12 @@ interface Answer {
 	userID: string;
 }
 
-interface QuizAnswer {
+export interface IQuizAnswer {
 	quizID: string;
 	answer: Answer[];
 }
 
-class UserAnswers extends DB<QuizAnswer> {
+class UserAnswers extends DB<IQuizAnswer> {
 	constructor() {
 		super('user_answers');
 	}
@@ -26,7 +26,7 @@ class UserAnswers extends DB<QuizAnswer> {
 	/**
 	 * ### Consumed By User
 	 * */
-	getAnswersForUser(quizID: string, userID: string): QuizAnswer | null {
+	getAnswersForUser(quizID: string, userID: string): IQuizAnswer | null {
 		const answers = this.get(quizID);
 		if (answers) {
 			const filtered = answers.answer.filter((answer) => answer.userID === userID);
@@ -44,7 +44,7 @@ class UserAnswers extends DB<QuizAnswer> {
 	createAnswer(quizID: string, answer: Answer) {
 		const answers = this.getAnswers(quizID);
 		if (!answers) {
-			const answerDoc: QuizAnswer = { quizID, answer: [answer] };
+			const answerDoc: IQuizAnswer = { quizID, answer: [answer] };
 			this.set(quizID, answerDoc);
 
 			return this.getAnswersForUser(quizID, answer.userID)!;

@@ -9,11 +9,15 @@ export const RegisterForm: FC = () => {
 	const history = useHistory();
 
 	const onCallback = (data: typeof initialValues) => {
-		user.create(data);
-		history.push('/admin/member/all');
+		const userData = user.create(data);
+		if (userData) {
+			history.push('/admin/member/all');
+		} else {
+			setErrors((prevState) => ({ ...prevState, emailAddress: 'Member already registed with this email' }));
+		}
 	};
 
-	const { values, errors, handleChange, handleSubmit } = useForm({
+	const { values, errors, setErrors, handleChange, handleSubmit } = useForm({
 		initialValues,
 		initialErrors,
 		validate,
