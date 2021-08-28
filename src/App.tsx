@@ -1,6 +1,6 @@
 import { importData } from 'demo/importData';
 import { FC, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { AdminRoute, UserRoute } from 'routes';
 import { routeList } from 'routes/constants';
 
@@ -10,19 +10,21 @@ const App: FC = () => {
 	useEffect(() => importData(start, setStart), [start]);
 
 	return (
-		<Router>
-			<Switch>
-				{routeList.map(({ type, ...rest }, i) =>
-					type === 'user' ? (
-						<UserRoute key={i} {...rest} />
-					) : type === 'admin' ? (
-						<AdminRoute key={i} {...rest} />
-					) : (
-						<Route key={i} {...rest} />
-					),
-				)}
-			</Switch>
-		</Router>
+		<div className="App">
+			<Router basename="https://sonjoydatta.github.io/quiz-test">
+				<Switch>
+					{routeList.map(({ type, ...rest }, i) =>
+						type === 'user' ? (
+							<UserRoute key={i} {...rest} />
+						) : type === 'admin' ? (
+							<AdminRoute key={i} {...rest} />
+						) : (
+							<Route key={i} {...rest} />
+						),
+					)}
+				</Switch>
+			</Router>
+		</div>
 	);
 };
 
