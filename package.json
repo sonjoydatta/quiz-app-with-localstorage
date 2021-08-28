@@ -2,7 +2,7 @@
 	"name": "quiz-test",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://sonjoydatta.github.io/quiz-test",
+	"homepage": "https://sonjoydatta.github.io/quiz-test/",
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
